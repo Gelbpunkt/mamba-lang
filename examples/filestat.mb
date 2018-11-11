@@ -8,7 +8,7 @@ function file_size(filename) {
 
 function filestat(files) {
 	for file in files {
-		say format("%s is %.2fkb\n", file, file_size(file) / 1024);
+		say(format("%s is %.2fkb\n", file, file_size(file) / 1024));
 	}
 }
 

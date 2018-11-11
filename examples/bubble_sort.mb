@@ -18,4 +18,4 @@ for i in 1 -> 100 {
     array_push(arr, randrange(1, 500));
 }
 
-say bubble_sort(arr);
+say(bubble_sort(arr));

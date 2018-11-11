@@ -16,4 +16,4 @@ function fac_r(n){
     return n * fac_r(n - 1);
 }
 
-say fac_i(6), " ", fac_r(6);
+say(fac_i(6), " ", fac_r(6));
