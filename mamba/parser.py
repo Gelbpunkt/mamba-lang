@@ -229,7 +229,7 @@ def p_in_expression(p):
 
 def p_print_statement(p):
     '''
-    statement : PRINT arguments STMT_END
+    statement : PRINT LPAREN arguments RPAREN STMT_END
     '''
     p[0] = ast.PrintStatement(p[2])
 

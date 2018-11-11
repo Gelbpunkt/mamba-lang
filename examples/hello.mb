@@ -1,6 +1,6 @@
-
-  function helloWorld() {
-      say "Hello World";
-  }
-  helloWorld();
-  
+function helloWorld() {
+    for i in "Hello World" {
+        say(i);
+    }
+}
+helloWorld();
