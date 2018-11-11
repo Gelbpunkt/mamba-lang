@@ -16,7 +16,7 @@ setuptools.setup(
     description="A language built on top of python, with JS flavours",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Gelbpunkt/mamba2",
+    url="https://github.com/Gelbpunkt/mamba-lang",
     packages=setuptools.find_packages(),
     license="MIT",
     install_requires=requirements,

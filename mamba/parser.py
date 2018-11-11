@@ -231,7 +231,7 @@ def p_print_statement(p):
     '''
     statement : PRINT LPAREN arguments RPAREN STMT_END
     '''
-    p[0] = ast.PrintStatement(p[2])
+    p[0] = ast.PrintStatement(p[3])
 
 
 def p_compound_operations(p):
