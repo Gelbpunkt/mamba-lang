@@ -1,0 +1,19 @@
+function fac_i(n){
+    r = 1;
+
+    for i in 1 -> n {
+        r *= i;
+    }
+
+    return r;
+}
+
+function fac_r(n){
+    if n == 0 {
+        return 1;
+    }
+
+    return n * fac_r(n - 1);
+}
+
+say fac_i(6), " ", fac_r(6);
