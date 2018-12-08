@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import mamba
 import sys
 import argparse
@@ -13,7 +16,11 @@ def str2bool(v):
 parser = argparse.ArgumentParser(description='The Mamba programming language')
 parser.add_argument('file', help='The file to execute')
 parser.add_argument('-l', '--limited', type=str2bool, dest="limited", help='Start in limited mode', required=False, const=True, default=False, nargs="?")
-args = vars(parser.parse_args())
 
-with open(args["file"]) as f:
-    mamba.execute(f.read(), limited=args["limited"])
+def main():
+    args = vars(parser.parse_args())
+    with open(args["file"]) as f:
+        mamba.execute(f.read(), limited=args["limited"])
+
+if __name__ == "__main__":
+    main()

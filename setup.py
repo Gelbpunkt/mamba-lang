@@ -18,6 +18,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Gelbpunkt/mamba-lang",
     packages=setuptools.find_packages(),
+    entry_points={
+        "console_scripts": "mamba = mamba.__main__:main",
+    },
     license="MIT",
     install_requires=requirements,
     classifiers=(
