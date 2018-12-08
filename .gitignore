@@ -1,5 +1,12 @@
 .idea
 __pycache__
+*.py[cod]
 parser.out
 parsetab.py
 scripts
+*.egg-info
+.venv
+venv
+env
+dist/
+build/
