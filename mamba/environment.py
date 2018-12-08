@@ -64,7 +64,7 @@ def file_exists(f):
 def list_range(*args):
     return list(range(*args))
 
-def declare_env(s: mamba.symbol_table.SymbolTable):
+def declare_env(s: mamba.symbol_table.SymbolTable, limited: bool):
     f = ast.BuiltInFunction
 
     # "constants"
@@ -116,14 +116,15 @@ def declare_env(s: mamba.symbol_table.SymbolTable):
     s.set_func('array_reverse', f(array_reverse))
     s.set_func('array_sort', f(array_sort))
 
-    # file
-    s.set_func('file', f(open))
-    s.set_func('file_close', f(file_close))
-    s.set_func('file_write', f(file_write))
-    s.set_func('file_read', f(file_read))
-    s.set_func('file_seek', f(file_seek))
-    s.set_func('file_pos', f(file_pos))
-    s.set_func('file_exists', f(file_exists))
+    if not limited:
+        # file
+        s.set_func('file', f(open))
+        s.set_func('file_close', f(file_close))
+        s.set_func('file_write', f(file_write))
+        s.set_func('file_read', f(file_read))
+        s.set_func('file_seek', f(file_seek))
+        s.set_func('file_pos', f(file_pos))
+        s.set_func('file_exists', f(file_exists))
 
-    # input
-    s.set_func('ask', f(input))
+        # input
+        s.set_func('ask', f(input))
