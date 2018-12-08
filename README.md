@@ -1,13 +1,15 @@
-## Mamba programming language
-Mamba is a simple dynamic typed, programming language.
-Thanks to [maldoinc](https://github.com/maldoinc/mamba) for a good thing to start with and modify!
-Sadly he's no longer working on it, so I made this and will continue updating it.
+## Mamba Programming Language
+
+Mamba is a simple dynamic typed programming language.
+Thanks to [maldoinc](https://github.com/maldoinc/mamba) for a great code base to start with and modify!
+
+Sadly, he's no longer working on it, so I made this fork and will continue updating it.
 
 I am working on this right now and there are lots of features to add, e.g. modules and limitation on loops and HTTP operations or modules.
 
 ### Installation requirements ###
 
-* Python3
+* Python 3.x
 * ply
 
 ### Features ###
@@ -26,25 +28,25 @@ I am working on this right now and there are lots of features to add, e.g. modul
 * Boolean
 * Arrays
 
-### Language description ###
+### Syntax ###
 
 #### Variables ####
 
-variables are dynamically typed immediately declared upon use `foo = "bar";`
+Variables are dynamically typed, and immediately declared. The syntax is `foo = "bar";`
 
 ### Operators ###
 
-logic: `and` `or` `not` `in` `not in` `>` `>=` `<` `<=` `==` `!=`
+Logic: `and` `or` `not` `in` `not in` `>` `>=` `<` `<=` `==` `!=`
 
-arithmetic: `+` `-` `*` `/` `**`
+Arithmetic: `+` `-` `*` `/` `**`
 
-binary: `~` `^` `|` `&` `>>` `<<`
+Binary: `~` `^` `|` `&` `>>` `<<`
 
-ternary: `test ? true_value : false_value`
+Ternary: `test ? true_value : false_value`
 
 #### Functions ####
 
-functions are declared via the following grammar
+Functions are declared via the following grammar:
 
     function func_name( [<arguments>,] ){
         < statements >
@@ -54,9 +56,9 @@ functions are declared via the following grammar
         return 4;
     }
 
-return value is specified with the `return` keyword which, as expected, immediately halts function execution upon being called. Functions can have their private functions which are inaccessible to the outer scope.
+The return value is specified with the `return` keyword which, as expected, immediately halts function execution upon being called. Functions can have their private functions which are inaccessible to the outer scope.
 
-#### Flow control ####
+#### Flow Control ####
 
 Mamba supports `if` statements for flow control via the following syntax
 
@@ -64,12 +66,12 @@ Mamba supports `if` statements for flow control via the following syntax
         < statements >
     }
 
-nb: Brackets are mandatory, while parenthesis on the expression are optional
+NB: Brackets are mandatory, while parentheses on the expression are optional.
 
 
 ### Loops ###
 
-Mamba supports two kind of loops, `for` and `while`
+Mamba supports `for` and `while` loops.
 
 **for syntax**
 
@@ -77,19 +79,19 @@ Mamba supports two kind of loops, `for` and `while`
         < statements >
     }
 
-nb: sequence accepts arrays and strings
+NB: The sequence field accepts arrays and strings:
 
     for variable in low -> high {
         < statements >
     }
     
-down to loops are constructed as
+Down to loops are constructed as:
 
     for variable in high <- low {
         < statements >
     }
 
-nb: loop indexes are inclusive
+NB: Loop indexes are inclusive (0-3 is 0, 1, 2, and 3)
 
 **while syntax**
 
@@ -97,13 +99,13 @@ nb: loop indexes are inclusive
         < statements >
     }
 
-there is also the alternative `for` syntax
+There is also the alternative `for` syntax:
 
     for {
         < statements >
     }
 
-which acts as an infinite loop (which internally is expressed as a `while true {}` statement)
+Which acts as an infinite loop (internally expressed as a `while true {}` statement).
 
 All loops can be prematurely exited via the `exit` statement when necessary
 
