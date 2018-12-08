@@ -163,10 +163,15 @@ def t_NUM_INT(t):
 
 
 def t_STRING(t):
-    r'"(?:\\"|.)*?"'
+    r'("|\')(?:\\"|.)*?("|\')'
 
     # let's escape the shit
-    t.value = bytes(t.value.lstrip('"').rstrip('"'), "utf-8").decode("unicode_escape")
+
+    # make multiple quotes possible like this
+    if t.value.startswith("'"):
+        t.value = bytes(t.value.lstrip("'").rstrip("'"), "utf-8").decode("unicode_escape")
+    else:
+        t.value = bytes(t.value.lstrip('"').rstrip('"'), "utf-8").decode("unicode_escape")
 
     return t
 
