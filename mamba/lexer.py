@@ -168,10 +168,8 @@ def t_STRING(t):
     # let's escape the shit
 
     # make multiple quotes possible like this
-    if t.value.startswith("'"):
-        t.value = bytes(t.value.lstrip("'").rstrip("'"), "utf-8").decode("unicode_escape")
-    else:
-        t.value = bytes(t.value.lstrip('"').rstrip('"'), "utf-8").decode("unicode_escape")
+    t.value = t.value[1:-1]
+    t.value = bytes(t.value, "utf-8").decode("unicode_escape")
 
     return t
 
