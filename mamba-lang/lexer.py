@@ -163,7 +163,7 @@ def t_NUM_INT(t):
 
 
 def t_STRING(t):
-    r'("(?:\\"|.)*?"|\'(?:\\\'|.)*?\')'
+    r'("|\')(?:\\"|.)*?("|\')'
 
     # let's escape the shit
 

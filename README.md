@@ -12,6 +12,14 @@ I am working on this right now and there are lots of features to add, e.g. modul
 * Python 3.x
 * ply
 
+Install Mamba using `pip3 install git+https://github.com/Gelbpunkt/mamba-lang`.
+
+It ships with a command line tool to execute files, the recommended ending is `.mb`.
+
+`mamba my-script.mb`
+
+The tool features `-h` for help and `-l` or `--limited` for a safe mode that limits memory usage, execution time and I/O.
+
 ### Features ###
 * Variables
 * Functions
