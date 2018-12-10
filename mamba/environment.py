@@ -83,6 +83,7 @@ def declare_env(s: mamba.symbol_table.SymbolTable, limited: bool):
     s.set_func('abs', f(abs))
     s.set_func('log', f(math.log))
     s.set_func('log2', f(math.log))
+    s.set_func('sqrt', f(math.sqrt))
     s.set_func('rand', f(random.random))
     s.set_func('randrange', f(random.randrange))
     s.set_func('randint', f(random.randint))
