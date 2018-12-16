@@ -60,7 +60,7 @@ Ternary: `test ? true_value : false_value`
 
 Doing nothing can be accomplished by leaving it simply out.
 
-    function do_nothing {
+    function do_nothing() {
     }
 
 
