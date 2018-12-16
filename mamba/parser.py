@@ -52,7 +52,7 @@ def p_exit_stmt(p):
 
 def p_pass_stmt(p):
     """
-    statement : STMT_END
+    statement :
     """
     p[0] = ast.PassStatement()
 
