@@ -32,7 +32,7 @@ def p_statement(p):
     statement : identifier
               | expression
               | if_statement
-              | pass_statement
+              |
     """
     p[0] = p[1]
 
@@ -49,13 +49,6 @@ def p_exit_stmt(p):
     statement : EXIT STMT_END
     """
     p[0] = ast.ExitStatement()
-
-
-def p_pass_stmt(p):
-    """
-    pass_statement :
-    """
-    p[0] = ast.PassStatement()
 
 
 def p_primitive(p):
