@@ -8,7 +8,7 @@ import sys
 import resource
 import signal
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 
 def execute(
