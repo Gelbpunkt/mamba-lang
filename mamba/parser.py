@@ -19,6 +19,7 @@ def p_statement_list(p):
     """
     statement_list : statement
                    | statement_list statement
+                   |
     """
     if len(p) == 2:
         p[0] = ast.InstructionList([p[1]])
@@ -32,7 +33,6 @@ def p_statement(p):
     statement : identifier
               | expression
               | if_statement
-              |
     """
     p[0] = p[1]
 
