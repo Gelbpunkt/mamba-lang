@@ -41,19 +41,14 @@ parser.add_argument(
 )
 parser.add_argument(
     "--version",
-    dest="version",
+    action="version",
     help="Shows the mamba version",
-    required=False,
-    const=True,
-    default=False,
-    nargs="?",
+    version=f"%(prog)s {mamba.__version__}",
 )
 
 
 def main():
     args = vars(parser.parse_args())
-    if args["version"]:
-        print(mamba.__version__)
     with open(args["file"]) as f:
         mamba.execute(f.read(), limited=args["limited"], show_ast=args["verbose"])
 
