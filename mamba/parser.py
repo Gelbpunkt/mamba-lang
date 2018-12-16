@@ -136,6 +136,7 @@ def p_assignable(p):
     """
     assignable : primitive
                | expression
+               | indexable
     """
     p[0] = p[1]
 
