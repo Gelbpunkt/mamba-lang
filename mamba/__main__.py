@@ -46,6 +46,7 @@ parser.add_argument(
     required=False,
     const=True,
     default=False,
+    nargs="?",
 )
 
 
