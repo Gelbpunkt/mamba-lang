@@ -1,3 +1,0 @@
-for i in "lmao" {
-    say(i);
-}
