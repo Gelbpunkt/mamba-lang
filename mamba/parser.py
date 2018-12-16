@@ -63,14 +63,6 @@ def p_primitive(p):
         p[0] = ast.Primitive(p[1])
 
 
-def p_indexable(p):
-    """
-    indexable : array
-              | STRING
-    """
-    p[0] = p[1]
-
-
 def p_binary_op(p):
     """
     expression : expression PLUS expression %prec PLUS
@@ -120,13 +112,6 @@ def p_paren(p):
     p[0] = p[2] if isinstance(p[2], ast.BaseExpression) else ast.Primitive(p[2])
 
 
-def p_array(p):
-    """
-    array : LSQBRACK arguments RSQBRACK
-    """
-    p[0] = ast.Array(p[2])
-
-
 def p_boolean(p):
     """
     boolean : TRUE
@@ -139,6 +124,15 @@ def p_assignable(p):
     """
     assignable : primitive
                | expression
+    """
+    p[0] = p[1]
+
+
+def p_indexable(p):
+    """
+    indexable : array
+              | STRING
+              | identifier
     """
     p[0] = p[1]
 
@@ -163,6 +157,13 @@ def p_ternary_op(p):
     expression : expression QUESTION_MARK expression COLON expression
     """
     p[0] = ast.TernaryOperator(p[1], p[3], p[5])
+
+
+def p_array(p):
+    """
+    array : LSQBRACK arguments RSQBRACK
+    """
+    p[0] = ast.Array(p[2])
 
 
 def p_array_access(p):
