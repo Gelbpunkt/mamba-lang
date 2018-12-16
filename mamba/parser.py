@@ -82,6 +82,13 @@ def p_indexable(p):
         p[0] = ast.Primitive(p[1])
 
 
+def p_indexable_expression(p):
+    """
+    expression : indexable
+    """
+    p[0] = p[1]
+
+
 def p_binary_op(p):
     """
     expression : expression PLUS expression %prec PLUS
@@ -298,7 +305,7 @@ def p_for_loop(p):
 
 def p_for_in_loop(p):
     """
-    statement : FOR identifier IN indexable LBRACK statement_list RBRACK
+    statement : FOR identifier IN expression LBRACK statement_list RBRACK
     """
     p[0] = ast.ForIn(p[2], p[4], p[6])
 
