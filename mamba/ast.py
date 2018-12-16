@@ -19,7 +19,7 @@ class InstructionList:
         return iter(self.children)
 
     def __repr__(self):
-        return '<InstructionList {0}>'.format(self.children)
+        return "<InstructionList {0}>".format(self.children)
 
     def eval(self):
         """
@@ -61,7 +61,7 @@ class ReturnStatement(ExitStatement):
         self.expr = expr
 
     def __repr__(self):
-        return '<Return expr={0}>'.format(self.expr)
+        return "<Return expr={0}>".format(self.expr)
 
     def eval(self):
         return full_eval(self.expr)
@@ -96,7 +96,7 @@ class Identifier(BaseExpression):
         self.name = name
 
     def __repr__(self):
-        return '<Identifier {0}>'.format(self.name)
+        return "<Identifier {0}>".format(self.name)
 
     def assign(self, val):
         if self.is_function:
@@ -116,7 +116,9 @@ class Array(BaseExpression):
         self.values = values
 
     def __repr__(self):
-        return '<Array len={0} items={1}>'.format(len(self.values.children), self.values)
+        return "<Array len={0} items={1}>".format(
+            len(self.values.children), self.values
+        )
 
     def eval(self):
         return self.values.eval()
@@ -128,7 +130,7 @@ class ArrayAccess(BaseExpression):
         self.index = index
 
     def __repr__(self):
-        return '<Array index={0}>'.format(self.index)
+        return "<Array index={0}>".format(self.index)
 
     def eval(self):
         return self.array.eval()[self.index.eval()]
@@ -141,33 +143,42 @@ class ArrayAssign(BaseExpression):
         self.value = value
 
     def __repr__(self):
-        return '<Array arr={0} index={1} value={2}>'.format(self.array, self.index, self.value)
+        return "<Array arr={0} index={1} value={2}>".format(
+            self.array, self.index, self.value
+        )
 
     def eval(self):
         self.array.eval()[self.index.eval()] = self.value.eval()
 
 
 class ArraySlice(BaseExpression):
-    def __init__(self, array: Identifier, start: BaseExpression=None, end: BaseExpression=None):
+    def __init__(
+        self,
+        array: Identifier,
+        start: BaseExpression = None,
+        end: BaseExpression = None,
+    ):
         self.array = array
         self.start = start
         self.end = end
 
     def __repr__(self):
-        return '<ArraySlice array={0} start={1} end={2}>'.format(self.array, self.start, self.end)
+        return "<ArraySlice array={0} start={1} end={2}>".format(
+            self.array, self.start, self.end
+        )
 
     def eval(self):
         if self.start is not None and self.end is not None:
             # access [start : end]
-            return self.array.eval()[self.start.eval():self.end.eval()]
+            return self.array.eval()[self.start.eval() : self.end.eval()]
 
         elif self.start is None and self.end is not None:
             # access [: end]
-            return self.array.eval()[:self.end.eval()]
+            return self.array.eval()[: self.end.eval()]
 
         elif self.start is not None and self.end is None:
             # access [start :]
-            return self.array.eval()[self.start.eval():]
+            return self.array.eval()[self.start.eval() :]
         else:
             return self.array.eval()[:]
 
@@ -178,7 +189,7 @@ class Assignment(BaseExpression):
         self.val = val
 
     def __repr__(self):
-        return '<Assignment sym={0}; val={1}>'.format(self.identifier, self.val)
+        return "<Assignment sym={0}; val={1}>".format(self.identifier, self.val)
 
     def eval(self):
         if self.identifier.is_function:
@@ -189,32 +200,31 @@ class Assignment(BaseExpression):
 
 class BinaryOperation(BaseExpression):
     __operations = {
-        '+': operator.add,
-        '-': operator.sub,
-        '*': operator.mul,
-        '**': operator.pow,
-        '/': operator.truediv,
-        '%': operator.mod,
-
-        '>': operator.gt,
-        '>=': operator.ge,
-        '<': operator.lt,
-        '<=': operator.le,
-        '==': operator.eq,
-        '!=': operator.ne,
-
-        'and': lambda a, b: a.eval() and b.eval(),
-        'or': lambda a, b: a.eval() or b.eval(),
-
-        '&': operator.and_,
-        '|': operator.or_,
-        '^': operator.xor,
-        '>>': operator.rshift,
-        '<<': operator.lshift,
+        "+": operator.add,
+        "-": operator.sub,
+        "*": operator.mul,
+        "**": operator.pow,
+        "/": operator.truediv,
+        "%": operator.mod,
+        ">": operator.gt,
+        ">=": operator.ge,
+        "<": operator.lt,
+        "<=": operator.le,
+        "==": operator.eq,
+        "!=": operator.ne,
+        "and": lambda a, b: a.eval() and b.eval(),
+        "or": lambda a, b: a.eval() or b.eval(),
+        "&": operator.and_,
+        "|": operator.or_,
+        "^": operator.xor,
+        ">>": operator.rshift,
+        "<<": operator.lshift,
     }
 
     def __repr__(self):
-        return '<BinaryOperation left ={0} right={1} operation="{2}">'.format(self.left, self.right, self.op)
+        return '<BinaryOperation left ={0} right={1} operation="{2}">'.format(
+            self.left, self.right, self.op
+        )
 
     def __init__(self, left, right, op):
         self.left = left
@@ -241,27 +251,37 @@ class BinaryOperation(BaseExpression):
             right = self.right.eval()
             return op(left, right)
         except TypeError:
-            fmt = (left.__class__.__name__, left, self.op, right.__class__.__name__, right)
-            raise InterpreterRuntimeError("Unable to apply operation (%s: %s) %s (%s: %s)" % fmt)
+            fmt = (
+                left.__class__.__name__,
+                left,
+                self.op,
+                right.__class__.__name__,
+                right,
+            )
+            raise InterpreterRuntimeError(
+                "Unable to apply operation (%s: %s) %s (%s: %s)" % fmt
+            )
 
 
 class CompoundOperation(BaseExpression):
     __operations = {
-        '+=': operator.iadd,
-        '-=': operator.isub,
-        '/=': operator.itruediv,
-        '*=': operator.imul,
-        '%=': operator.imod,
-        '**=': operator.ipow,
+        "+=": operator.iadd,
+        "-=": operator.isub,
+        "/=": operator.itruediv,
+        "*=": operator.imul,
+        "%=": operator.imod,
+        "**=": operator.ipow,
     }
 
-    def __init__(self, identifier: Identifier, modifier: BaseExpression, operation: str):
+    def __init__(
+        self, identifier: Identifier, modifier: BaseExpression, operation: str
+    ):
         self.identifier = identifier
         self.modifier = modifier
         self.operation = operation
 
     def __repr__(self):
-        fmt = '<Compound identifier={0} mod={1} operation={2}>'
+        fmt = "<Compound identifier={0} mod={1} operation={2}>"
         return fmt.format(self.identifier, self.modifier, self.operation)
 
     def eval(self):
@@ -276,19 +296,23 @@ class CompoundOperation(BaseExpression):
             self.identifier.assign(self.__operations[self.operation](l, r))
         except TypeError:
             fmt = (l.__class__.__name__, l, self.operation, r.__class__.__name__, r)
-            raise InterpreterRuntimeError("Unable to apply operation (%s: %s) %s (%s: %s)" % fmt)
+            raise InterpreterRuntimeError(
+                "Unable to apply operation (%s: %s) %s (%s: %s)" % fmt
+            )
 
 
 class UnaryOperation(BaseExpression):
     __operations = {
-        '+': operator.pos,
-        '-': operator.neg,
-        '~': operator.inv,
-        'not': operator.not_
+        "+": operator.pos,
+        "-": operator.neg,
+        "~": operator.inv,
+        "not": operator.not_,
     }
 
     def __repr__(self):
-        return '<Unary operation: operation={0} expr={1}>'.format(self.operation, self.expr)
+        return "<Unary operation: operation={0} expr={1}>".format(
+            self.operation, self.expr
+        )
 
     def __init__(self, operation, expr: BaseExpression):
         self.operation = operation
@@ -299,13 +323,17 @@ class UnaryOperation(BaseExpression):
 
 
 class If(BaseExpression):
-    def __init__(self, condition: BaseExpression, truepart: InstructionList, elsepart=None):
+    def __init__(
+        self, condition: BaseExpression, truepart: InstructionList, elsepart=None
+    ):
         self.condition = condition
         self.truepart = truepart
         self.elsepart = elsepart
 
     def __repr__(self):
-        return '<If condition={0} then={1} else={2}>'.format(self.condition, self.truepart, self.elsepart)
+        return "<If condition={0} then={1} else={2}>".format(
+            self.condition, self.truepart, self.elsepart
+        )
 
     def eval(self):
         if self.condition.eval():
@@ -315,7 +343,14 @@ class If(BaseExpression):
 
 
 class For(BaseExpression):
-    def __init__(self, variable: Identifier, start: Primitive, end: Primitive, asc: bool, body: InstructionList):
+    def __init__(
+        self,
+        variable: Identifier,
+        start: Primitive,
+        end: Primitive,
+        asc: bool,
+        body: InstructionList,
+    ):
         self.variable = variable
         self.start = start
         self.end = end
@@ -323,8 +358,10 @@ class For(BaseExpression):
         self.body = body
 
     def __repr__(self):
-        fmt = '<For start={0} direction={1} end={2} body={3}>'
-        return fmt.format(self.start, 'asc' if self.asc else 'desc', self.end, self.body)
+        fmt = "<For start={0} direction={1} end={2} body={3}>"
+        return fmt.format(
+            self.start, "asc" if self.asc else "desc", self.end, self.body
+        )
 
     def eval(self):
         if self.asc:
@@ -345,13 +382,17 @@ class For(BaseExpression):
 
 
 class ForIn(BaseExpression):
-    def __init__(self, variable: Identifier, sequence: BaseExpression, body: InstructionList):
+    def __init__(
+        self, variable: Identifier, sequence: BaseExpression, body: InstructionList
+    ):
         self.variable = variable
         self.sequence = sequence
         self.body = body
 
     def __repr__(self):
-        return '<ForIn var={0} in iterable={1} do body={2}>'.format(self.variable, self.sequence, self.body)
+        return "<ForIn var={0} in iterable={1} do body={2}>".format(
+            self.variable, self.sequence, self.body
+        )
 
     def eval(self):
         for i in self.sequence.eval():
@@ -366,7 +407,7 @@ class While(BaseExpression):
         self.body = body
 
     def __repr__(self):
-        return '<While cond={0} body={1}>'.format(self.condition, self.body)
+        return "<While cond={0} body={1}>".format(self.condition, self.body)
 
     def eval(self):
         while self.condition.eval():
@@ -379,7 +420,7 @@ class PrintStatement(BaseExpression):
         self.items = items
 
     def __repr__(self):
-        return '<Print {0}>'.format(self.items)
+        return "<Print {0}>".format(self.items)
 
     def eval(self):
         # Alternative, but not the default behavior
@@ -393,7 +434,7 @@ class FunctionCall(BaseExpression):
         self.params = params
 
     def __repr__(self):
-        return '<Function call name={0} params={1}>'.format(self.name, self.params)
+        return "<Function call name={0} params={1}>".format(self.name, self.params)
 
     def __eval_builtin_func(self):
         func = self.name.eval()
@@ -438,7 +479,7 @@ class Function(BaseExpression):
         self.body = body
 
     def __repr__(self):
-        return '<Function params={0} body={1}>'.format(self.params, self.body)
+        return "<Function params={0} body={1}>".format(self.params, self.body)
 
     def eval(self, args):
         symbols.set_local(True)
@@ -462,20 +503,20 @@ class BuiltInFunction(BaseExpression):
         self.func = func
 
     def __repr__(self):
-        return '<Builtin function {0}>'.format(self.func)
+        return "<Builtin function {0}>".format(self.func)
 
     def eval(self, args):
         return self.func(*args)
 
 
 class InExpression(BaseExpression):
-    def __init__(self, a: BaseExpression, b: BaseExpression, not_in: bool=False):
+    def __init__(self, a: BaseExpression, b: BaseExpression, not_in: bool = False):
         self.a = a
         self.b = b
         self.not_in = not_in
 
     def __repr__(self):
-        return '<In {0} in {1}>'.format(self.a, self.b)
+        return "<In {0} in {1}>".format(self.a, self.b)
 
     def eval(self):
         if self.not_in:
@@ -484,13 +525,17 @@ class InExpression(BaseExpression):
 
 
 class TernaryOperator(BaseExpression):
-    def __init__(self, cond: BaseExpression, trueval: BaseExpression, falseval: BaseExpression):
+    def __init__(
+        self, cond: BaseExpression, trueval: BaseExpression, falseval: BaseExpression
+    ):
         self.cond = cond
         self.trueval = trueval
         self.falseval = falseval
 
     def __repr__(self):
-        return '<Ternary cond={0} true={1} false={2}>'.format(self.cond, self.trueval, self.falseval)
+        return "<Ternary cond={0} true={1} false={2}>".format(
+            self.cond, self.trueval, self.falseval
+        )
 
     def eval(self):
         return self.trueval.eval() if self.cond.eval() else self.falseval.eval()

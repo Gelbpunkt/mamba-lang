@@ -2,32 +2,28 @@ from mamba.exceptions import *
 
 
 class SymbolTable:
-    __func = 'functions'
-    __sym = 'symbols'
-    __local = 'local'
+    __func = "functions"
+    __sym = "symbols"
+    __local = "local"
 
-    __table = {
-        __func: {},
-        __sym: {},
-        __local: []
-    }
+    __table = {__func: {}, __sym: {}, __local: []}
 
     def __is_local(self):
-        '''
+        """
         Returns true if symbol table is being called from inside
         a function rather than the global scope
 
         :return: bool
-        '''
+        """
         return len(self.__table[self.__local]) > 0
 
     def table(self):
         return self.__table
 
     def get_local_table(self):
-        '''
+        """
         Returns the active local symbol table (the last one on the stack)
-        '''
+        """
 
         t = self.__table[self.__local]
 
