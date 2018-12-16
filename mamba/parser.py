@@ -23,6 +23,8 @@ def p_statement_list(p):
     """
     if len(p) == 2:
         p[0] = ast.InstructionList([p[1]])
+    elif len(p) == 1:
+        p[0] = ast.InstructionList([ast.PassStatement()])
     else:
         p[1].children.append(p[2])
         p[0] = p[1]
