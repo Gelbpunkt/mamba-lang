@@ -63,6 +63,18 @@ def p_primitive(p):
         p[0] = ast.Primitive(p[1])
 
 
+def p_indexable(p):
+    """
+    indexable : identifier
+              | STRING
+              | array
+    """
+    if isinstance(p[1], ast.BaseExpression):
+        p[0] = p[1]
+    else:  # we need to handle the strings
+        p[0] = ast.Primitive(p[1])
+
+
 def p_binary_op(p):
     """
     expression : expression PLUS expression %prec PLUS
@@ -124,15 +136,6 @@ def p_assignable(p):
     """
     assignable : primitive
                | expression
-    """
-    p[0] = p[1]
-
-
-def p_indexable(p):
-    """
-    indexable : array
-              | STRING
-              | identifier
     """
     p[0] = p[1]
 
