@@ -56,6 +56,11 @@ class ExitStatement(BaseExpression):
         pass
 
 
+class PassStatement(BaseExpression):
+    def eval(self):
+        pass
+
+
 class ReturnStatement(ExitStatement):
     def __init__(self, expr: BaseExpression):
         self.expr = expr
@@ -69,7 +74,7 @@ class ReturnStatement(ExitStatement):
 
 def full_eval(expr: BaseExpression):
     """
-    Fully evaluates the passex expression returning it's value
+    Fully evaluates the passed expression returning it's value
     """
 
     while isinstance(expr, BaseExpression):

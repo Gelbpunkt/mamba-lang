@@ -8,6 +8,7 @@ reserved = {
     "in": "IN",
     "while": "WHILE",
     "exit": "EXIT",
+    "pass": "PASS",
     "function": "FUNCTION",
     "return": "RETURN",
     "say": "PRINT",

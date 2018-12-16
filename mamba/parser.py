@@ -50,6 +50,13 @@ def p_exit_stmt(p):
     p[0] = ast.ExitStatement()
 
 
+def p_pass_stmt(p):
+    """
+    statement : PASS STMT_END
+    """
+    p[0] = ast.PassStatement()
+
+
 def p_primitive(p):
     """
     primitive : NUM_INT
@@ -78,17 +85,17 @@ def p_indexable(p):
 def p_binary_op(p):
     """
     expression : expression PLUS expression %prec PLUS
-            | expression MINUS expression %prec MINUS
-            | expression MUL expression %prec MUL
-            | expression DIV expression %prec DIV
-            | expression EXP expression %prec EXP
-            | expression MOD expression %prec MOD
+               | expression MINUS expression %prec MINUS
+               | expression MUL expression %prec MUL
+               | expression DIV expression %prec DIV
+               | expression EXP expression %prec EXP
+               | expression MOD expression %prec MOD
 
-            | expression BIT_AND expression
-            | expression BIT_OR expression
-            | expression BIT_XOR expression
-            | expression LSHIFT expression
-            | expression RSHIFT expression
+               | expression BIT_AND expression
+               | expression BIT_OR expression
+               | expression BIT_XOR expression
+               | expression LSHIFT expression
+               | expression RSHIFT expression
     """
     p[0] = ast.BinaryOperation(p[1], p[3], p[2])
 

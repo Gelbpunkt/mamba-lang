@@ -1,1 +1,3 @@
 a = [1];
+array_push(a, 2);
+say(a[1]);
