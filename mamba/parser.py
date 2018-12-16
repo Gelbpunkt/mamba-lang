@@ -65,8 +65,8 @@ def p_primitive(p):
 
 def p_indexable(p):
     """
-    indexable : STRING
-              | array
+    indexable : array
+              | STRING
     """
     p[0] = p[1]
 
