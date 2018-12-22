@@ -10,7 +10,7 @@ with open("requirements.txt") as f:
 
 setuptools.setup(
     name="mamba",
-    version="1.0.0",
+    version="0.2.0",
     author="Jens Reidel",
     author_email="jens.reidel@gmail.com",
     description="A language built on top of python, with JS flavours",
