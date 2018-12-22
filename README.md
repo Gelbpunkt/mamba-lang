@@ -20,6 +20,10 @@ It ships with a command line tool to execute files, the recommended ending is `.
 
 The tool features `-h` for help and `-l` or `--limited` for a safe mode that limits memory usage, execution time and I/O.
 
+`-v (--verbose)` toggles the verbose mode and it will send the AST.
+
+`--version` will show the mamba version.
+
 ### Features ###
 * Variables
 * Functions
@@ -51,6 +55,14 @@ Arithmetic: `+` `-` `*` `/` `**`
 Binary: `~` `^` `|` `&` `>>` `<<`
 
 Ternary: `test ? true_value : false_value`
+
+### Pass Statement
+
+Doing nothing can be accomplished by leaving it simply out.
+
+    function do_nothing() {
+    }
+
 
 #### Functions ####
 

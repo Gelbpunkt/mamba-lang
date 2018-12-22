@@ -1,0 +1,7 @@
+function do_nothing() {
+}
+
+for i in range(5) {
+}
+
+do_nothing();
