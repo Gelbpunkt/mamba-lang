@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import mamba
-import sys
 import argparse
+
+import mamba
 
 
 def str2bool(v):

@@ -1,7 +1,8 @@
 import ply.yacc as yacc
+
 import mamba.ast as ast
-from mamba.lexer import *
-from mamba.exceptions import *
+from mamba.exceptions import ParserSyntaxError
+from mamba.lexer import tokens  # noqa: F401
 
 disable_warnings = False
 
@@ -230,7 +231,7 @@ def p_ifstatement(p):
 def p_ifstatement_else(p):
     """
     if_statement : IF expression LBRACK statement_list RBRACK ELSE LBRACK statement_list RBRACK
-    """
+    """  # noqa: E501
     p[0] = ast.If(p[2], p[4], p[8])
 
 
@@ -295,7 +296,7 @@ def p_for_loop(p):
     """
     statement : FOR identifier IN expression ARROW_LTR expression LBRACK statement_list RBRACK
               | FOR identifier IN expression ARROW_RTL expression LBRACK statement_list RBRACK
-    """
+    """  # noqa: E501
     p[0] = ast.For(p[2], p[4], p[6], p[5] == "->", p[8])
 
 

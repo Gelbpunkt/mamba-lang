@@ -1,11 +1,12 @@
+import math
 import os
+import random
+import sys
 from timeit import default_timer
+
 import mamba
 import mamba.ast as ast
 import mamba.symbol_table
-import math
-import random
-import sys
 
 
 def substr(s: str, start: int, length: int):

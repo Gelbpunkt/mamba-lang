@@ -1,4 +1,4 @@
-from mamba.exceptions import *
+from mamba.exceptions import DuplicateSymbol, SymbolNotFound
 
 
 class SymbolTable:

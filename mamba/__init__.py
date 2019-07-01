@@ -1,14 +1,14 @@
-import time
-import mamba.parser as p
-import mamba.ast
-import mamba.environment
-import mamba.exceptions
 import pprint
-import sys
 import resource
 import signal
+import sys
 
-__version__ = "0.2.0"
+import mamba.ast
+import mamba.exceptions
+import mamba.parser as p
+from mamba import environment
+
+__version__ = "0.3.0a"
 
 
 def execute(

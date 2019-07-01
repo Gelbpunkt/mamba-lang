@@ -1,4 +1,5 @@
 import ply.lex as lex
+
 import mamba.exceptions
 
 reserved = {
@@ -98,7 +99,7 @@ t_MINUS_EQ = r"-="
 t_MUL_EQ = r"\*="
 t_DIV_EQ = r"/="
 t_MOD_EQ = "%="
-t_EXP_EQ = "\*\*="
+t_EXP_EQ = r"\*\*="
 
 t_RSHIFT = ">>"
 t_LSHIFT = "<<"

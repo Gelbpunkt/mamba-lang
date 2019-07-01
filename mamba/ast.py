@@ -1,7 +1,8 @@
 import operator
 from types import LambdaType
-from mamba.exceptions import *
+
 import mamba.symbol_table
+from mamba.exceptions import InterpreterRuntimeError, InvalidParamCount
 
 symbols = mamba.symbol_table.SymbolTable()
 
@@ -294,13 +295,19 @@ class CompoundOperation(BaseExpression):
         # does not return anything as compound operations
         # are statements and not expressions
 
-        l = self.identifier.eval()
-        r = self.modifier.eval()
+        left = self.identifier.eval()
+        right = self.modifier.eval()
 
         try:
-            self.identifier.assign(self.__operations[self.operation](l, r))
+            self.identifier.assign(self.__operations[self.operation](left, right))
         except TypeError:
-            fmt = (l.__class__.__name__, l, self.operation, r.__class__.__name__, r)
+            fmt = (
+                left.__class__.__name__,
+                left,
+                self.operation,
+                right.__class__.__name__,
+                right,
+            )
             raise InterpreterRuntimeError(
                 "Unable to apply operation (%s: %s) %s (%s: %s)" % fmt
             )
